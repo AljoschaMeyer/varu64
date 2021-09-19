@@ -27,11 +27,11 @@ This specification allows different ways to encode the same number, e.g. `0x00` 
 
 Analogously to this specification, you can encode signed integers by using big-endian two's complement representation.
 
-The specification can also be adapted to other sizes of integers (up to 2040 bit inclusive), by starting the length table at a different value. For example, the VarI32 encoding is defined as follows:
+The specification can also be adapted to other sizes of integers (up to 2040 bit inclusive), by starting the length table at a different value. For example, the VarI32 encoding for signed 32-bit integers is defined as follows:
 
-To decode a VarI32, look at the first byte. If its value is below 252, the value itself is the encoded number in two's complement. Else, the first byte determines the further `length` of the encoding:
+To decode a VarI32, look at the first byte. If its (unsigned) value is below 252, the value itself is the encoded number in two's complement. Else, the first byte determines the further `length` of the encoding:
 
-| first byte | number of additional bytes |
+| first byte (unsigned) | number of additional bytes |
 |------------|----------------------------|
 | 252 | 1 |
 | 253 | 2 |
@@ -39,6 +39,10 @@ To decode a VarI32, look at the first byte. If its value is below 252, the value
 | 255 | 4 |
 
 Following the first byte are `length` many bytes. These bytes are the big-endian, two's complement representation of the encoded number.
+
+## Non-Zero Unsigned Integers
+
+The VarNonZeroU64 encoding for nonzero 64-bit integers consists of subtracting one from the integer and encoding the resulting number as a regular VarU64.
 
 ## Remarks/Properties
 
