@@ -48,14 +48,6 @@ The VarNonZeroU64 encoding for nonzero 64-bit integers consists of subtracting o
 
 Non-zero unsigned integers can be generalized to unsigned integers strictly greater than some number `X`: The VarGtXU64 encoding for 64-bit integer strictly great then `X` consists of subtracting `X` from the integer and encoding the resulting number as a regular VarU64. Unsigned integers of other size work analogously.
 
-## Remarks/Properties
+## Remarks
 
-For VarU64, whether the first byte signifies a length can be checked efficiently by testing whether the first 5 bits are set to 1. In that case, the length itself is 1 plus the value of the last three bits.
-
-The length of an encoded value can be determined by solely looking at the first byte.
-
-Due to the canonicity requirement of only allowing the shortest possible encoding, there is a bijection between unsigned 64 bit integers and encodings.
-
-The canonical format pays for the simplicity with a (somewhat) large number of unused byte strings. On the plus side, those can be used as extension points.
-
-Related work: This has been inspired by the issues in the [multiformats varint](https://github.com/multiformats/unsigned-varint) repository, in particular issues [#8](https://github.com/multiformats/unsigned-varint/issues/8) and [#12](https://github.com/multiformats/unsigned-varint/issues/12).
+This has been inspired by the issues in the [multiformats varint](https://github.com/multiformats/unsigned-varint) repository, in particular issues [#8](https://github.com/multiformats/unsigned-varint/issues/8) and [#12](https://github.com/multiformats/unsigned-varint/issues/12).
