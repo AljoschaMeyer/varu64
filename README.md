@@ -42,7 +42,11 @@ Following the first byte are `length` many bytes. These bytes are the big-endian
 
 ## Non-Zero Unsigned Integers
 
-The VarNonZeroU64 encoding for nonzero 64-bit integers consists of subtracting one from the integer and encoding the resulting number as a regular VarU64.
+The VarNonZeroU64 encoding for nonzero 64-bit integers consists of subtracting one from the integer and encoding the resulting number as a regular VarU64. Unsigned integers of other size work analogously.
+
+## Greater-Than `X` Unsigned Integers
+
+Non-zero unsigned integers can be generalized to unsigned integers strictly greater than some number `X`: The VarGtXU64 encoding for 64-bit integer strictly great then `X` consists of subtracting `X` from the integer and encoding the resulting number as a regular VarU64. Unsigned integers of other size work analogously.
 
 ## Remarks/Properties
 
